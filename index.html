@@ -240,15 +240,22 @@ function resetResponseButtons(){
   responseButtons.forEach(btn => btn.classList.remove("selected"));
 }
 
-function sendRSVP(){
+function sendRSVP() {
   const name = document.getElementById("guestName").value.trim();
-  if(!name || !selectedResponse){
-    alert("Please enter your name and select response");
+  if (!name || !selectedResponse) {
+    alert("Please enter your name and select a response");
     return;
   }
-  window.open(`https://wa.me/91XXXXXXXXXX?text=RSVP%0AName: ${name}%0A${selectedResponse}`, "_blank");
+
+  // Replace 6377932489 with your WhatsApp number
+  const phone = "916377932489"; 
+  const message = encodeURIComponent(`RSVP\nName: ${name}\nResponse: ${selectedResponse}`);
+  const url = `https://wa.me/${phone}?text=${message}`;
+
+  window.open(url, "_blank");
   closeRSVP();
 }
+
 </script>
 </body>
 </html>
