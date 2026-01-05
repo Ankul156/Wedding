@@ -1,328 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wedding Invitation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<style>
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  height:100vh;
+  font-family:'Poppins',sans-serif;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#f2f2f2;
+}
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap"
-    rel="stylesheet">
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+/* CARD */
+.card{
+  width:100%;
+  max-width:430px;
+  height:100vh;
+  padding:26px 20px;
+  border-radius:28px;
+  background:url("images/rm119batch4-adj-20-leavesframe.jpg") center/cover no-repeat;
+  box-shadow:0 25px 60px rgba(0,0,0,.35);
+  position:relative;
+  overflow:hidden;
+}
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.22);
+}
+.card-content{
+  position:relative;
+  z-index:1;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  text-align:center;
+}
 
-  <style>
-    * {
-      box-sizing: border-box
-    }
+/* TEXT */
+.title{font-family:'Playfair Display',serif;font-size:26px;color:#4b1d6b;}
+.subtitle{font-size:13px;margin-bottom:8px;}
+.names-ring{
+  width:140px;height:140px;margin:10px auto;
+  border-radius:50%;border:3px solid #b18ae0;
+  display:flex;align-items:center;justify-content:center;
+}
+.names{font-family:'Playfair Display',serif;font-size:22px;color:#5a2d82;}
+.date strong{display:block;font-size:28px;color:#6f2cff;}
+.venue{font-size:13px;margin-bottom:14px;}
 
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: #f2f2f2;
-    }
+/* BUTTONS */
+.buttons{display:flex;flex-direction:column;align-items:center;gap:10px;}
+.btn{
+  width:210px;height:44px;border-radius:22px;border:none;
+  color:#fff;font-size:14px;font-weight:500;cursor:pointer;
+  text-decoration:none;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 14px rgba(0,0,0,.25);transition:0.2s;
+}
+.home{background:linear-gradient(135deg,#4facfe,#7d3cff);}
+.wedding{background:linear-gradient(135deg,#ff6fb1,#b83280);}
+.rsvp{background:linear-gradient(135deg,#28c76f,#1e9f5b);}
+.functions{background:linear-gradient(135deg,#ffa726,#fb8c00);}
+.btn:hover{transform:translateY(-2px) scale(1.02);}
 
-    /* CARD */
-    .card {
-      width: 100%;
-      max-width: 430px;
-      height: 100vh;
-      padding: 26px 20px;
-      border-radius: 28px;
-      background: url("images/rm119batch4-adj-20-leavesframe.jpg") center/cover no-repeat;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, .35);
-      position: relative;
-      overflow: hidden;
-    }
+/* MODAL */
+.modal{
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.7);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:99;
+}
+.modal-box{
+  background:#fff;
+  width:92%;
+  max-width:380px;
+  padding:25px 20px;
+  border-radius:25px;
+  box-shadow:0 15px 35px rgba(0,0,0,.4);
+  text-align:center;
+  animation:slideIn 0.4s ease-out;
+}
+@keyframes slideIn{
+  0%{transform:translateY(-50px);opacity:0;}
+  100%{transform:translateY(0);opacity:1;}
+}
+.modal-box h3{
+  margin-bottom:18px;
+  font-size:22px;
+  color:#4b1d6b;
+}
 
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, .22);
-    }
+/* RSVP STYLING */
+#guestName{
+  width:100%;
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid #ccc;
+  margin-bottom:18px;
+  font-size:16px;
+}
+.response-options{
+  display:flex;
+  justify-content:space-around;
+  margin-bottom:18px;
+}
+.response-btn{
+  flex:1;
+  margin:0 5px;
+  padding:12px 0;
+  border-radius:14px;
+  border:none;
+  font-size:15px;
+  color:#fff;
+  cursor:pointer;
+  transition:0.2s;
+  box-shadow:0 5px 12px rgba(0,0,0,0.15);
+}
+.response-btn.selected{transform:scale(1.05);box-shadow:0 8px 18px rgba(0,0,0,0.25);}
+.response-yes{background:linear-gradient(135deg,#28c76f,#1e9f5b);}
+.response-no{background:linear-gradient(135deg,#f44336,#d32f2f);}
 
-    .card-content {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-align: center;
-    }
+.modal-actions{display:flex;flex-direction:column;gap:10px;}
+.close{
+  background:#e0e0e0;color:#000;width:100%;height:42px;
+  border-radius:18px;border:none;cursor:pointer;
+}
 
-    /* TEXT */
-    .title {
-      font-family: 'Playfair Display', serif;
-      font-size: 26px;
-      color: #4b1d6b;
-    }
-
-    .subtitle {
-      font-size: 13px;
-      margin-bottom: 8px;
-    }
-
-    .names-ring {
-      width: 140px;
-      height: 140px;
-      margin: 10px auto;
-      border-radius: 50%;
-      border: 3px solid #b18ae0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .names {
-      font-family: 'Playfair Display', serif;
-      font-size: 22px;
-      color: #5a2d82;
-    }
-
-    .date strong {
-      display: block;
-      font-size: 28px;
-      color: #6f2cff;
-    }
-
-    .venue {
-      font-size: 13px;
-      margin-bottom: 14px;
-    }
-
-    /* BUTTONS */
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn {
-      width: 210px;
-      height: 44px;
-      border-radius: 22px;
-      border: none;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, .25);
-    }
-
-    .home {
-      background: linear-gradient(135deg, #4facfe, #7d3cff)
-    }
-
-    .wedding {
-      background: linear-gradient(135deg, #ff6fb1, #b83280)
-    }
-
-    .rsvp {
-      background: linear-gradient(135deg, #28c76f, #1e9f5b)
-    }
-
-    .functions {
-      background: linear-gradient(135deg, #ffa726, #fb8c00)
-    }
-
-    .btn:hover {
-      transform: translateY(-2px)
-    }
-
-    /* MODAL */
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, .75);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 99;
-    }
-
-    .modal-box {
-      background: #fff;
-      width: 92%;
-      max-width: 380px;
-      padding: 24px;
-      border-radius: 22px;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, .4);
-    }
-
-    /* RSVP */
-    .modal-box h3 {
-      text-align: center;
-      margin-bottom: 14px;
-      font-size: 22px;
-      color: #4b1d6b;
-    }
-
-    .rsvp-label {
-      font-size: 13px;
-      margin-bottom: 6px;
-      color: #444;
-    }
-
-    .rsvp-input {
-      width: 100%;
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px solid #ddd;
-      font-size: 14px;
-      margin-bottom: 16px;
-    }
-
-    .rsvp-options {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .rsvp-option {
-      border: 2px solid #e0e0e0;
-      border-radius: 16px;
-      padding: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      transition: .3s;
-    }
-
-    .rsvp-option input {
-      display: none
-    }
-
-    .rsvp-option span {
-      font-size: 14px;
-      font-weight: 500;
-    }
-
-    .rsvp-option.attend {
-      border-color: #28c76f
-    }
-
-    .rsvp-option.not-attend {
-      border-color: #ff5252
-    }
-
-    .rsvp-option input:checked+span {
-      color: #fff;
-    }
-
-    .rsvp-option.attend input:checked+span {
-      background: #28c76f;
-      padding: 6px 10px;
-      border-radius: 12px;
-    }
-
-    .rsvp-option.not-attend input:checked+span {
-      background: #ff5252;
-      padding: 6px 10px;
-      border-radius: 12px;
-    }
-
-    .modal-actions {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .close {
-      background: #e0e0e0;
-      color: #000;
-      width: 100%;
-      height: 42px;
-      border-radius: 18px;
-      border: none;
-      font-size: 14px;
-    }
-  </style>
+/* FUNCTION CARDS */
+.function-card{
+  background:#f9f9f9;border-radius:16px;padding:14px;margin-bottom:14px;
+  box-shadow:0 6px 14px rgba(0,0,0,.12);
+}
+.function-card h4{margin:0 0 8px;font-size:16px;color:#6f2cff;}
+.function-info{font-size:13px;color:#444;margin-bottom:6px;display:flex;gap:6px;align-items:center;}
+.map-btn{
+  margin-top:8px;display:inline-block;padding:6px 12px;
+  font-size:12px;border-radius:14px;background:linear-gradient(135deg,#4facfe,#7d3cff);
+  color:#fff;text-decoration:none;
+}
+</style>
 </head>
-
 <body>
 
-  <div class="card" data-aos="zoom-in">
-    <div class="card-content">
-
-      <div class="title">Wedding Invitation</div>
-      <div class="subtitle">With great joy, we invite you</div>
-
-      <div class="names-ring">
-        <div class="names">Pooja<br>&<br>Yogendra</div>
-      </div>
-
-      <div class="date"><strong>10</strong> February 2026 · Tuesday</div>
-
-      <div class="venue">
-        Kishan Mahal Marriage Garden<br>Jaipur
-      </div>
-
-      <div class="buttons">
-        <a class="btn home" href="#" target="_blank">🏠 Home Location</a>
-        <a class="btn wedding" href="#" target="_blank">💒 Wedding Venue</a>
-        <button class="btn functions">🎉 Functions</button>
-        <button class="btn rsvp" onclick="openRSVP()">📩 RSVP</button>
-      </div>
-
+<div class="card" data-aos="zoom-in">
+  <div class="card-content">
+    <div class="title">Wedding Invitation</div>
+    <div class="subtitle">With great joy, we invite you</div>
+    <div class="names-ring"><div class="names">Pooja<br>&<br>Yogendra</div></div>
+    <div class="date"><strong>10</strong> February 2026 · Tuesday</div>
+    <div class="venue"> Kishan Mahal Marriage Garden<br> Jaipur </div>
+    <div class="buttons">
+      <a class="btn home" href="https://maps.app.goo.gl/njszsXG9HgRhqSbe8" target="_blank">🏠 Home Location</a>
+      <a class="btn wedding" href="https://maps.app.goo.gl/BaM9XXX9yfv6Xo339" target="_blank">💒 Wedding Venue</a>
+      <button class="btn functions" onclick="openFunctions()">🎉 Functions</button>
+      <button class="btn rsvp" onclick="openRSVP()">📩 RSVP</button>
     </div>
   </div>
+</div>
 
-  <!-- RSVP MODAL -->
-  <div class="modal" id="rsvpModal">
-    <div class="modal-box">
-      <h3>RSVP Confirmation</h3>
+<!-- FUNCTIONS MODAL -->
+<div class="modal" id="functionsModal">
+  <div class="modal-box">
+    <h3>Wedding Functions</h3>
+    <div class="function-card">
+      <h4>Haldi Ceremony</h4>
+      <div class="function-info">📅 8 Feb 2026</div>
+      <div class="function-info">⏰ 9:00 AM</div>
+      <div class="function-info">📍 Bride’s Residence, Jaipur</div>
+      <a class="map-btn" href="https://maps.app.goo.gl/njszsXG9HgRhqSbe8" target="_blank">Open Map</a>
+    </div>
+    <div class="function-card">
+      <h4>Mehendi & Sangeet</h4>
+      <div class="function-info">📅 9 Feb 2026</div>
+      <div class="function-info">⏰ 7:00 PM</div>
+      <div class="function-info">📍 Kishan Mahal Garden</div>
+      <a class="map-btn" href="https://maps.app.goo.gl/BaM9XXX9yfv6Xo339" target="_blank">Open Map</a>
+    </div>
+    <div class="function-card">
+      <h4>Wedding Ceremony</h4>
+      <div class="function-info">📅 10 Feb 2026</div>
+      <div class="function-info">⏰ 8:00 PM</div>
+      <div class="function-info">📍 Kishan Mahal Garden</div>
+      <a class="map-btn" href="https://maps.app.goo.gl/BaM9XXX9yfv6Xo339" target="_blank">Open Map</a>
+    </div>
+    <div class="modal-actions"><button class="close" onclick="closeFunctions()">Close</button></div>
+  </div>
+</div>
 
-      <div class="rsvp-label">Guest Name</div>
-      <input class="rsvp-input" type="text" id="guestName" placeholder="Enter your name">
-
-      <div class="rsvp-options">
-        <label class="rsvp-option attend">
-          <input type="radio" name="response" value="I will attend">
-          <span>✅ I will attend</span>
-        </label>
-
-        <label class="rsvp-option not-attend">
-          <input type="radio" name="response" value="Sorry, I can’t attend">
-          <span>❌ Sorry, I can’t attend</span>
-        </label>
-      </div>
-
-      <div class="modal-actions">
-        <button class="btn rsvp" onclick="sendRSVP()">Send via WhatsApp</button>
-        <button class="close" onclick="closeRSVP()">Cancel</button>
-      </div>
+<!-- RSVP MODAL -->
+<div class="modal" id="rsvpModal">
+  <div class="modal-box">
+    <h3>RSVP Confirmation</h3>
+    <input type="text" id="guestName" placeholder="Your Name">
+    <div class="response-options">
+      <button class="response-btn response-yes" data-value="Will attend">I will attend</button>
+      <button class="response-btn response-no" data-value="Will not attend">Can't attend</button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn rsvp" onclick="sendRSVP()">Send via WhatsApp</button>
+      <button class="close" onclick="closeRSVP()">Cancel</button>
     </div>
   </div>
+</div>
 
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init({ duration: 900, once: true });
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script>
+AOS.init({duration:900,once:true});
 
-    function openRSVP() { document.getElementById("rsvpModal").style.display = "flex" }
-    function closeRSVP() { document.getElementById("rsvpModal").style.display = "none" }
+const rsvpModal = document.getElementById("rsvpModal");
+const functionsModal = document.getElementById("functionsModal");
+let selectedResponse = null;
 
-    function sendRSVP() {
-      const name = document.getElementById("guestName").value.trim();
-      const res = document.querySelector('input[name="response"]:checked');
-      if (!name || !res) { alert("Please enter name and select response"); return; }
-      window.open(`https://wa.me/91XXXXXXXXXX?text=RSVP%0AName: ${name}%0A${res.value}`, "_blank");
-      closeRSVP();
-    }
-  </script>
+function openRSVP(){ rsvpModal.style.display="flex"; }
+function closeRSVP(){ rsvpModal.style.display="none"; selectedResponse=null; resetResponseButtons(); }
+function openFunctions(){ functionsModal.style.display="flex"; }
+function closeFunctions(){ functionsModal.style.display="none"; }
 
+// RSVP Button Selection
+const responseButtons = document.querySelectorAll(".response-btn");
+responseButtons.forEach(btn => {
+  btn.addEventListener("click", ()=>{
+    selectedResponse = btn.getAttribute("data-value");
+    resetResponseButtons();
+    btn.classList.add("selected");
+  });
+});
+function resetResponseButtons(){
+  responseButtons.forEach(btn => btn.classList.remove("selected"));
+}
+
+function sendRSVP(){
+  const name = document.getElementById("guestName").value.trim();
+  if(!name || !selectedResponse){
+    alert("Please enter your name and select response");
+    return;
+  }
+  window.open(`https://wa.me/91XXXXXXXXXX?text=RSVP%0AName: ${name}%0A${selectedResponse}`, "_blank");
+  closeRSVP();
+}
+</script>
 </body>
-
 </html>
