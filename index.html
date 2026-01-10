@@ -5,6 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wedding Invitation</title>
+
+  <!-- Fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300;400;500&display=swap"
     rel="stylesheet">
@@ -62,6 +64,7 @@
 
     .subtitle {
       font-size: 13px;
+      margin-bottom: 10px;
     }
 
     .names-ring {
@@ -73,6 +76,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      background: rgba(255, 255, 255, .6);
     }
 
     .names {
@@ -89,7 +93,7 @@
 
     .venue {
       font-size: 13px;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .buttons {
@@ -111,8 +115,12 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 6px 14px rgba(0, 0, 0, .25);
-      transition: .2s;
+      transition: .25s;
       text-decoration: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.03);
     }
 
     .home {
@@ -131,10 +139,6 @@
       background: linear-gradient(135deg, #28c76f, #1e9f5b);
     }
 
-    .btn:hover {
-      transform: translateY(-2px) scale(1.02);
-    }
-
     /* MODAL */
     .modal {
       position: fixed;
@@ -150,42 +154,135 @@
       background: #fff;
       width: 92%;
       max-width: 380px;
-      padding: 25px 20px;
+      padding: 22px 20px;
       border-radius: 25px;
       box-shadow: 0 15px 35px rgba(0, 0, 0, .4);
       text-align: center;
-      animation: slideIn .4s ease;
+      animation: slideIn .45s ease;
+    }
+
+    .modal-box::before {
+      content: "✿ ✿ ✿";
+      display: block;
+      font-size: 14px;
+      letter-spacing: 6px;
+      color: #b18ae0;
+      margin-bottom: 10px;
     }
 
     @keyframes slideIn {
       from {
-        transform: translateY(-40px);
+        transform: translateY(60px) scale(.95);
         opacity: 0;
       }
 
       to {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
       }
     }
 
-    /* FUNCTIONS */
+    /* FUNCTIONS GRID */
+    .functions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    @media (max-width: 420px) {
+      .functions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* FUNCTIONS MODAL SCROLL */
+    #functionsModal .modal-box {
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .functions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 12px;
+
+      max-height: 55vh;
+      /* 👈 controls scroll height */
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    /* Smooth scrollbar (optional, looks premium) */
+    .functions-grid::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .functions-grid::-webkit-scrollbar-thumb {
+      background: #b18ae0;
+      border-radius: 10px;
+    }
+
+    .functions-grid::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    @media (max-width: 420px) {
+      .functions-grid {
+        grid-template-columns: 1fr;
+        max-height: 60vh;
+      }
+    }
+
+
     .function-card {
       background: #f9f9f9;
       border-radius: 16px;
       padding: 14px;
-      margin-bottom: 12px;
       box-shadow: 0 6px 14px rgba(0, 0, 0, .12);
+      transition: .25s;
+      position: relative;
+    }
+
+    .function-card:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 22px rgba(0, 0, 0, .18);
     }
 
     .function-card h4 {
       margin: 0 0 6px;
+      font-family: 'Playfair Display', serif;
+      font-size: 15px;
       color: #6f2cff;
     }
 
     .function-info {
-      font-size: 13px;
+      font-size: 12px;
+    }
+
+    .function-info:not(:last-child) {
+      border-bottom: 1px dashed #ddd;
+      padding-bottom: 4px;
       margin-bottom: 4px;
+    }
+
+    .function-card.highlight {
+      background: linear-gradient(135deg, #fff5fb, #f3e9ff);
+      border: 2px solid #b18ae0;
+    }
+
+    .function-card.highlight::after {
+      content: "MAIN EVENT";
+      position: absolute;
+      top: -10px;
+      right: 12px;
+      background: #6f2cff;
+      color: #fff;
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 12px;
     }
 
     /* RSVP */
@@ -212,10 +309,6 @@
       border: none;
       color: #fff;
       cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
       transition: .25s;
     }
 
@@ -236,14 +329,20 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      margin-top: 10px;
     }
 
     .close {
-      background: #e0e0e0;
-      border-radius: 18px;
       height: 42px;
+      border-radius: 18px;
       border: none;
+      background: linear-gradient(135deg, #eee, #ddd);
       cursor: pointer;
+      font-weight: 500;
+    }
+
+    .close:hover {
+      background: #ccc;
     }
   </style>
 </head>
@@ -256,15 +355,15 @@
       <div class="subtitle">With great joy, we invite you to the wedding of</div>
 
       <div class="names-ring">
-        <div class="names">Pooja<br>&<br>Yogendra <span style="font-size: 15px;">(Arvind)</span></div>
+        <div class="names">Pooja<br>&<br>Yogendra <span style="font-size: 14px;">(Arvind)</span></div>
       </div>
 
       <div class="date"><strong>10</strong> February 2026 · Tuesday</div>
       <div class="venue">Kishan Mahal Marriage Garden<br>Jaipur</div>
 
       <div class="buttons">
-        <a class="btn home" href="https://maps.app.goo.gl/cGW3LajMyvQ7akE9A" target="_blank">🏠 Home</a>
-        <a class="btn wedding" href="https://maps.app.goo.gl/BaM9XXX9yfv6Xo339" target="_blank">💒 Wedding</a>
+        <a class="btn home" href="https://maps.app.goo.gl/cGW3LajMyvQ7akE9A" target="_blank">🏠 Home Location</a>
+        <a class="btn wedding" href="https://maps.app.goo.gl/BaM9XXX9yfv6Xo339" target="_blank">💒 Wedding Venue</a>
         <button class="btn functions" onclick="openFunctions()">🎉 Functions</button>
         <button class="btn rsvp" onclick="openRSVP()">📩 RSVP</button>
       </div>
@@ -275,34 +374,48 @@
   <div class="modal" id="functionsModal">
     <div class="modal-box">
       <h3>Wedding Functions</h3>
-      <div class="function-card">
-        <h4>Haldi & Mehandi</h4>
-        <div class="function-info">📅 8 Feb 2026</div>
-        <div class="function-info">⏰ 4:00 PM</div>
-        <div class="function-info">📍 Bride’s Residence, Jaipur</div>
-      </div>
-      <div class="function-card">
-        <h4>Sangeet</h4>
-        <div class="function-info">📅 9 Feb 2026</div>
-        <div class="function-info">⏰ 11:00 AM</div>
-        <div class="function-info">📍 Bride’s Residence, Jaipur</div>
-      </div>
-      <div class="function-card">
-        <h4>Chaak & Bhaat</h4>
-        <div class="function-info">📅 9 Feb 2026</div>
-        <div class="function-info">⏰ 4:00 PM</div>
-        <div class="function-info">📍 Bride’s Residence, Jaipur</div>
-      </div>
-      <div class="function-card">
-        <h4>Wedding Ceremony</h4>
-        <div class="function-info">📅 10 Feb 2026</div>
-        <div class="function-info">⏰ 8:00 PM</div>
-        <div class="function-info">📍 Kishan Mahal Garden</div>
+
+      <div class="functions-grid">
+        <div class="function-card">
+          <h4>Vinayak Sthapna & Lagan</h4>
+          <div class="function-info">📅 6 Feb 2026</div>
+          <div class="function-info">⏰ 10:00 AM</div>
+          <div class="function-info">📍 Bride’s Residence, Jaipur</div>
+        </div>
+
+        <div class="function-card">
+          <h4>Haldi & Mehendi</h4>
+          <div class="function-info">📅 8 Feb 2026</div>
+          <div class="function-info">⏰ 4:00 PM</div>
+          <div class="function-info">📍 Bride’s Residence, Jaipur</div>
+        </div>
+
+        <div class="function-card">
+          <h4>Sangeet</h4>
+          <div class="function-info">📅 9 Feb 2026</div>
+          <div class="function-info">⏰ 11:00 AM</div>
+          <div class="function-info">📍 Bride’s Residence, Jaipur</div>
+        </div>
+
+        <div class="function-card">
+          <h4>Chaak & Bhaat</h4>
+          <div class="function-info">📅 9 Feb 2026</div>
+          <div class="function-info">⏰ 4:00 PM</div>
+          <div class="function-info">📍 Bride’s Residence, Jaipur</div>
+        </div>
+
+        <div class="function-card highlight">
+          <h4>Wedding Ceremony</h4>
+          <div class="function-info">📅 10 Feb 2026</div>
+          <div class="function-info">⏰ 8:00 PM</div>
+          <div class="function-info">📍 Kishan Mahal Garden</div>
+        </div>
       </div>
 
-      <div class="modal-actions"><button class="close" onclick="closeFunctions()">Close</button></div>
+      <div class="modal-actions">
+        <button class="close" onclick="closeFunctions()">Close</button>
+      </div>
     </div>
-  </div>
   </div>
 
   <!-- RSVP MODAL -->
@@ -325,7 +438,6 @@
   </div>
 
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
-
   <script>
     AOS.init({ duration: 900, once: true });
 
